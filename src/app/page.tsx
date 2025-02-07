@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { AnimatedBackground } from "@/components/ui/animated-background";
 import { AnimatedGradientBlobs } from "@/components/ui/animated-gradient-blobs";
+import { motion } from "framer-motion";
 
 // Dynamically import icons
 const ArrowRight = dynamic(() => import("lucide-react").then((mod) => mod.ArrowRight), {
@@ -166,11 +167,30 @@ export default function HomePage() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-          <div className="w-5 h-8 border-2 border-white/10 rounded-full p-1">
-            <div className="w-1 h-2 bg-white/20 rounded-full animate-bounce mx-auto" />
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 0.5 }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer group"
+          onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+        >
+          <span className="text-sm font-medium text-zinc-500 group-hover:text-white transition-colors">
+            Scroll to explore
+          </span>
+          <div className="w-6 h-10 border-2 border-zinc-500 group-hover:border-white rounded-full p-1 transition-colors">
+            <motion.div 
+              className="w-1.5 h-1.5 bg-zinc-500 group-hover:bg-white rounded-full mx-auto"
+              animate={{ 
+                y: [0, 12, 0],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Feature Cards Section */}
