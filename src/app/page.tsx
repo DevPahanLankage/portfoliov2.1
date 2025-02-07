@@ -5,6 +5,8 @@ import { AnimatedContainer } from "@/components/ui/animated-container";
 import { siteConfig } from "@/config/site";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { AnimatedBackground } from "@/components/ui/animated-background";
+import { AnimatedGradientBlobs } from "@/components/ui/animated-gradient-blobs";
 
 // Dynamically import icons
 const ArrowRight = dynamic(() => import("lucide-react").then((mod) => mod.ArrowRight), {
@@ -63,6 +65,12 @@ export default function HomePage() {
     <main className="flex flex-col">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
+        {/* Animated Background */}
+        <AnimatedBackground />
+        
+        {/* Animated Gradient Blobs */}
+        <AnimatedGradientBlobs />
+        
         {/* Blue accent light effect - adjusted to match screenshot */}
         <div className="absolute top-1/2 right-0 w-[600px] h-[800px] bg-blue-500/10 blur-[150px] rounded-full transform -translate-y-1/2" />
         
