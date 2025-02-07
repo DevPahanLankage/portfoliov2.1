@@ -38,6 +38,13 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const navItems = [
+    { id: "home", label: "Home" },
+    { id: "about", label: "About" },
+    { id: "projects", label: "Projects" },
+    { id: "contact", label: "Contact" },
+  ];
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -48,13 +55,6 @@ export function Navbar() {
       setIsOpen(false);
     }
   };
-
-  const navItems = [
-    { id: "home", label: "Home" },
-    { id: "about", label: "About" },
-    { id: "portfolio", label: "Portfolio" },
-    { id: "contact", label: "Contact" },
-  ];
 
   if (!mounted) {
     return null;

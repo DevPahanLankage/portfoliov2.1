@@ -455,4 +455,69 @@
   );
   filter: blur(8px);
   animation: beam-spread 4s ease-in-out infinite;
+}
+
+/* Wave Animation Styles */
+.waveWrapper {
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 150px;
+  z-index: 5;
+}
+
+.waveWrapperInner {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  height: 100%;
+  bottom: -1px;
+}
+
+.bgTop {
+  z-index: 15;
+  opacity: 0.5;
+}
+
+.bgMiddle {
+  z-index: 10;
+  opacity: 0.75;
+}
+
+.bgBottom {
+  z-index: 5;
+}
+
+.wave {
+  position: absolute;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  transform-origin: center bottom;
+}
+
+.waveAnimation .wave {
+  animation: moveWave 15s linear infinite;
+}
+
+.waveAnimation .wave:nth-of-type(2) {
+  animation: moveWave 10s linear infinite;
+}
+
+.waveAnimation .wave:nth-of-type(3) {
+  animation: moveWave 8s linear infinite;
+}
+
+@keyframes moveWave {
+  0% {
+    transform: translateX(0) translateZ(0);
+  }
+  50% {
+    transform: translateX(-25%) translateZ(0);
+  }
+  100% {
+    transform: translateX(-50%) translateZ(0);
+  }
 } 

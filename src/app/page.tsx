@@ -8,6 +8,21 @@ import Image from "next/image";
 import { AnimatedBackground } from "@/components/ui/animated-background";
 import { AnimatedGradientBlobs } from "@/components/ui/animated-gradient-blobs";
 import { motion } from "framer-motion";
+import { AnimatedWaves } from "@/components/ui/animated-waves";
+
+// Utility function for skill level percentage
+function getSkillLevel(level: string): string {
+  switch (level.toLowerCase()) {
+    case "expert":
+      return "90%";
+    case "advanced":
+      return "75%";
+    case "intermediate":
+      return "60%";
+    default:
+      return "45%";
+  }
+}
 
 // Dynamically import icons
 const ArrowRight = dynamic(() => import("lucide-react").then((mod) => mod.ArrowRight), {
@@ -64,15 +79,15 @@ export default function HomePage() {
 
   return (
     <main className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
+      {/* Home/Hero Section */}
+      <section id="home" className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
         {/* Animated Background */}
         <AnimatedBackground />
         
         {/* Animated Gradient Blobs */}
         <AnimatedGradientBlobs />
         
-        {/* Blue accent light effect - adjusted to match screenshot */}
+        {/* Blue accent light effect */}
         <div className="absolute top-1/2 right-0 w-[600px] h-[800px] bg-blue-500/10 blur-[150px] rounded-full transform -translate-y-1/2" />
         
         <div className="container relative px-4 pt-20 pb-20">
@@ -191,6 +206,96 @@ export default function HomePage() {
             />
           </div>
         </motion.div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="relative min-h-screen bg-white text-zinc-800">
+        {/* Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-blue-200/30 rounded-full blur-[120px]" />
+          <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-purple-200/30 rounded-full blur-[100px]" />
+        </div>
+
+        <div className="container relative px-4 py-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto text-center mb-12"
+          >
+            <h2 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-zinc-800 to-zinc-500 bg-clip-text text-transparent">
+              About Me
+            </h2>
+            <p className="text-xl text-zinc-600 mb-8 leading-relaxed">
+              A passionate developer crafting digital experiences with code and creativity
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Image Side */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative"
+            >
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-tr from-blue-100/80 to-purple-100/80 mix-blend-multiply" />
+                <Image
+                  src="/images/picture1.jpg"
+                  alt="Working on code"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              {/* Decorative Elements */}
+              <div className="absolute -top-4 -left-4 w-24 h-24 bg-blue-100 rounded-xl -z-10 transform rotate-6" />
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-purple-100 rounded-xl -z-10 transform -rotate-6" />
+            </motion.div>
+
+            {/* Content Side */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="space-y-8"
+            >
+              <div className="space-y-6">
+                <h3 className="text-3xl font-bold text-zinc-800">My Journey</h3>
+                <p className="text-lg text-zinc-600 leading-relaxed">
+                  As a Full Stack Developer at Elevate360, I blend technical expertise with creative innovation to craft exceptional digital experiences. Specializing in HTML/CSS, C#, Python, and JavaScript, I lead the development of cutting-edge web solutions while leveraging modern AI technologies to optimize development workflows.
+                </p>
+                <p className="text-lg text-zinc-600 leading-relaxed">
+                  My approach combines strategic problem-solving with collaborative teamwork, ensuring each project exceeds expectations. When I'm not coding, you'll find me at the gym, at a rave, or spending time with friends – maintaining the perfect balance between technical excellence and creative inspiration.
+                </p>
+              </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                {[
+                  { number: "5+", label: "Years Experience" },
+                  { number: "50+", label: "Projects Delivered" },
+                  { number: "20+", label: "Happy Clients" },
+                  { number: "8+", label: "Core Technologies" },
+                ].map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 + index * 0.1 }}
+                    className="text-center p-4 rounded-xl bg-white shadow-[0_0_20px_rgba(0,0,0,0.05)] hover:shadow-[0_0_25px_rgba(0,0,0,0.1)] transition-shadow"
+                  >
+                    <div className="text-2xl font-bold text-zinc-800">{stat.number}</div>
+                    <div className="text-sm text-zinc-500">{stat.label}</div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Animated Waves */}
+        <AnimatedWaves />
       </section>
 
       {/* Feature Cards Section */}
@@ -326,7 +431,7 @@ export default function HomePage() {
       </section>
 
       {/* Projects Section */}
-      <section className="py-20 bg-muted/50">
+      <section id="projects" className="py-20 bg-muted/50">
         <div className="container px-4">
           <AnimatedContainer
             initial={{ opacity: 0, y: 20 }}
