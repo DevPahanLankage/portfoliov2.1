@@ -9,6 +9,12 @@ import { AnimatedBackground } from "@/components/ui/animated-background";
 import { AnimatedGradientBlobs } from "@/components/ui/animated-gradient-blobs";
 import { motion } from "framer-motion";
 import { AnimatedWaves } from "@/components/ui/animated-waves";
+import { AnimatedText } from "@/components/ui/aceternity/animated-text";
+import { SkillBackground } from "@/components/ui/aceternity/skill-background";
+import { Spotlight } from "@/components/ui/aceternity/spotlight-new";
+import { CardSpotlight } from "@/components/ui/aceternity/card-spotlight";
+import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
+import { TracingBeam } from "@/components/ui/aceternity/tracing-beam";
 
 // Utility function for skill level percentage
 function getSkillLevel(level: string): string {
@@ -44,6 +50,28 @@ const Layout = dynamic(() => import("lucide-react").then((mod) => mod.Layout), {
   ssr: false,
 });
 const Server = dynamic(() => import("lucide-react").then((mod) => mod.Server), {
+  ssr: false,
+});
+const Workflow = dynamic(() => import("lucide-react").then((mod) => mod.GitBranch), {
+  ssr: false,
+});
+// Development Approach Icons
+const PenTool = dynamic(() => import("lucide-react").then((mod) => mod.PenTool), {
+  ssr: false,
+});
+const CodeSquare = dynamic(() => import("lucide-react").then((mod) => mod.CodeSquare), {
+  ssr: false,
+});
+const TestTube = dynamic(() => import("lucide-react").then((mod) => mod.TestTube), {
+  ssr: false,
+});
+const GitPullRequest = dynamic(() => import("lucide-react").then((mod) => mod.GitPullRequest), {
+  ssr: false,
+});
+const Rocket = dynamic(() => import("lucide-react").then((mod) => mod.Rocket), {
+  ssr: false,
+});
+const FileText = dynamic(() => import("lucide-react").then((mod) => mod.FileText), {
   ssr: false,
 });
 
@@ -223,9 +251,11 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center mb-12"
           >
-            <h2 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-zinc-800 to-zinc-500 bg-clip-text text-transparent">
-              About Me
-            </h2>
+            <AnimatedText
+              text="About Me"
+              el="h2"
+              className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-zinc-800 to-zinc-500 bg-clip-text text-transparent"
+            />
             <p className="text-xl text-zinc-600 mb-8 leading-relaxed">
               A passionate developer crafting digital experiences with code and creativity
             </p>
@@ -298,135 +328,170 @@ export default function HomePage() {
         <AnimatedWaves />
       </section>
 
-      {/* Feature Cards Section */}
-      <section className="py-20 bg-neutral-900">
-        <div className="container px-4">
-          <AnimatedContainer
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Everything you need for productive team work
-            </h2>
-          </AnimatedContainer>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {[
-              "Team Planner",
-              "Project Management",
-              "Virtual Office",
-              "Chat",
-              "Documents",
-              "Inbox"
-            ].map((feature, index) => (
-              <AnimatedContainer
-                key={feature}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="group p-4 bg-neutral-800/50 backdrop-blur-sm rounded-xl border border-white/10 hover:border-white/20 transition-colors"
-              >
-                <h3 className="text-sm font-medium text-neutral-200">{feature}</h3>
-              </AnimatedContainer>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-20 bg-muted/50">
-        <div className="container px-4">
-          <AnimatedContainer
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-4xl mx-auto text-center space-y-4"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold">Everything you need for your next project</h2>
-            <p className="text-xl text-muted-foreground">
-              Comprehensive development solutions for modern web applications
-            </p>
-          </AnimatedContainer>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-            {[
-              {
-                icon: <Code className="w-10 h-10" />,
-                title: "Frontend Development",
-                description: "Creating responsive and interactive user interfaces with React and Next.js",
-              },
-              {
-                icon: <Server className="w-10 h-10" />,
-                title: "Backend Development",
-                description: "Building robust and scalable server-side solutions",
-              },
-              {
-                icon: <Layout className="w-10 h-10" />,
-                title: "UI/UX Design",
-                description: "Designing intuitive and beautiful user experiences",
-              },
-            ].map((feature, index) => (
-              <AnimatedContainer
-                key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="group p-8 bg-card rounded-xl border hover:border-primary/50 transition-colors"
-              >
-                <div className="text-primary mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground">{feature.description}</p>
-              </AnimatedContainer>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Skills Section */}
-      <section className="py-20">
-        <div className="container px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <AnimatedContainer
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="space-y-6"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold">Unmatched expertise in modern web technologies</h2>
-              <p className="text-xl text-muted-foreground">
-                With years of experience in full-stack development, I bring a comprehensive skill set to every project.
-              </p>
-              <div className="grid grid-cols-2 gap-4">
-                {siteConfig.skills.slice(0, 6).map((skill, index) => (
-                  <AnimatedContainer
-                    key={skill.name}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    className="p-4 rounded-lg bg-card border"
-                  >
-                    <h4 className="font-medium">{skill.name}</h4>
-                    <p className="text-sm text-muted-foreground">{skill.level}</p>
-                  </AnimatedContainer>
-                ))}
-              </div>
-            </AnimatedContainer>
-            <AnimatedContainer
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="relative h-[400px] rounded-xl overflow-hidden"
-            >
-              <Image
-                src="/coding.jpg"
-                alt="Coding workspace"
-                fill
-                className="object-cover"
-              />
-            </AnimatedContainer>
+      <section className="relative py-20 overflow-hidden">
+        <SkillBackground />
+        <Spotlight 
+          gradientFirst="radial-gradient(68.54% 68.72% at 55.02% 31.46%, rgba(255, 255, 255, 0.1) 0, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0) 80%)"
+          gradientSecond="radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.08) 0, rgba(255, 255, 255, 0.04) 80%, transparent 100%)"
+          gradientThird="radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.06) 0, rgba(255, 255, 255, 0.04) 80%, transparent 100%)"
+          translateY={-200}
+          duration={4}
+        />
+        <div className="container relative mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <AnimatedText
+              text="Skills & Expertise"
+              el="h2"
+              className="text-5xl md:text-7xl font-bold mb-4 text-white"
+            />
+            <p className="text-xl text-zinc-400 mb-8">
+              Technologies and tools I specialize in
+            </p>
+          </motion.div>
+
+          {/* Skills Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {siteConfig.skillCategories.slice(0, 3).map((category, index) => (
+              <motion.div
+                key={category.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2 }}
+                className="group relative"
+              >
+                {/* Category Card */}
+                <CardSpotlight className="h-full">
+                  <div className="relative z-10 flex flex-col items-center text-center mb-8">
+                    <div className="p-3 rounded-xl bg-white/10 mb-4 backdrop-blur-sm">
+                      {category.icon === "Layout" && <Layout className="w-6 h-6" />}
+                      {category.icon === "Server" && <Server className="w-6 h-6" />}
+                      {category.icon === "Code" && <Code className="w-6 h-6" />}
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-2">{category.title}</h3>
+                    <p className="text-sm text-zinc-400">{category.description}</p>
+                  </div>
+
+                  {/* Skills Grid */}
+                  <div className="grid grid-cols-2 gap-4">
+                    {category.skills.map((skill, skillIndex) => (
+                      <motion.div
+                        key={skill.name}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.2 + skillIndex * 0.1 }}
+                        className="group/skill relative"
+                      >
+                        <div className="relative overflow-hidden rounded-lg bg-white/[0.08] p-4 hover:bg-white/[0.12] transition-colors duration-300">
+                          <div className="relative z-10 flex items-center justify-between">
+                            <p className="text-sm font-medium text-white">{skill.name}</p>
+                            <div className="relative w-6 h-6">
+                              <Image
+                                src={`/logos/${skill.icon}.svg`}
+                                alt={skill.name}
+                                fill
+                                className="object-contain opacity-75 group-hover/skill:opacity-100 transition-opacity"
+                              />
+                            </div>
+                          </div>
+                          {/* Hover Effect */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover/skill:opacity-100 transition-opacity duration-300" />
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </CardSpotlight>
+              </motion.div>
+            ))}
           </div>
+
+          {/* Development Approach Workflow */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mt-20"
+          >
+            <div className="text-center mb-20">
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">Development Approach</h3>
+              <p className="text-xl text-zinc-400">My systematic approach to software development</p>
+            </div>
+
+            <div className="flex justify-center">
+              <TracingBeam className="w-full max-w-4xl">
+                <div className="relative flex flex-col items-center">
+                  {/* Workflow Steps */}
+                  <div className="space-y-28">
+                    {[
+                      {
+                        title: "Planning & Design",
+                        description: "Starting with Agile methodologies, breaking down requirements into manageable sprints",
+                        icon: PenTool
+                      },
+                      {
+                        title: "Development",
+                        description: "Writing clean, maintainable code following best practices and design patterns",
+                        icon: CodeSquare
+                      },
+                      {
+                        title: "Testing",
+                        description: "Implementing Test-Driven Development (TDD) to ensure code quality and reliability",
+                        icon: TestTube
+                      },
+                      {
+                        title: "Code Review",
+                        description: "Conducting thorough peer reviews to maintain code quality and share knowledge",
+                        icon: GitPullRequest
+                      },
+                      {
+                        title: "Deployment",
+                        description: "Using CI/CD pipelines for automated testing and seamless deployment",
+                        icon: Rocket
+                      },
+                      {
+                        title: "Documentation",
+                        description: "Creating comprehensive documentation for better maintainability and onboarding",
+                        icon: FileText
+                      }
+                    ].map((step, index) => (
+                      <motion.div
+                        key={step.title}
+                        initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.2 * index }}
+                        className="relative flex items-center justify-center"
+                      >
+                        {/* Content */}
+                        <div 
+                          className={`absolute w-[300px] ${
+                            index % 2 === 0 
+                              ? "right-[calc(50%+40px)] text-right" 
+                              : "left-[calc(50%+40px)] text-left"
+                          }`}
+                        >
+                          <h4 className="text-xl font-semibold text-white mb-2">{step.title}</h4>
+                          <p className="text-zinc-400">{step.description}</p>
+                        </div>
+
+                        {/* Circle and Icon */}
+                        <div className="flex items-center justify-center">
+                          <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center relative group">
+                            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+                            <step.icon className="w-6 h-6 text-white/70 group-hover:text-white transition-colors duration-300" />
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </TracingBeam>
+            </div>
+          </motion.div>
         </div>
       </section>
 

@@ -131,6 +131,12 @@ If needed, you can further use the `web_scraper.py` file to scrape the web page 
 - Add debug information to stderr while keeping the main output clean in stdout for better pipeline integration
 - When using seaborn styles in matplotlib, use 'seaborn-v0_8' instead of 'seaborn' as the style name due to recent seaborn version changes
 - Use 'gpt-4o' as the model name for OpenAI's GPT-4 with vision capabilities
+- When using Framer Motion with TypeScript, ensure proper type definitions for motion components and their props
+- Don't remove dependencies (like Three.js) without fully understanding their purpose in the project
+- Always check component dependencies and imports before making structural changes
+- When dealing with animation libraries, maintain proper type safety while keeping the component structure simple
+- Use motion.div instead of dynamic motion components when possible to avoid TypeScript complexity
+- Keep track of progress and tasks in the Scratchpad to maintain project organization
 
 # Scratchpad
 
@@ -140,49 +146,51 @@ If needed, you can further use the `web_scraper.py` file to scrape the web page 
 Building a modern portfolio website using Next.js, React, and TailwindCSS with a focus on performance, accessibility, and user experience.
 
 ### Progress Tracking
-[ ] Initial Setup
-  [ ] Create Next.js project with TypeScript
-  [ ] Configure TailwindCSS and required dependencies
-  [ ] Set up project structure and folder organization
+[X] Initial Setup
+  [X] Create Next.js project with TypeScript
+  [X] Configure TailwindCSS and required dependencies
+  [X] Set up project structure and folder organization
 
-[ ] Core Development
-  [ ] Layout & Navigation
-  [ ] Theme Implementation (Light/Dark mode)
-  [ ] Responsive Design System
-  [ ] Animation System (Framer Motion)
+[X] Core Development
+  [X] Layout & Navigation
+  [X] Theme Implementation (Light/Dark mode)
+  [X] Responsive Design System
+  [X] Animation System (Framer Motion)
 
-[ ] Pages Implementation
-  [ ] Home Page
-  [ ] About Page
-  [ ] Portfolio Page
-  [ ] Contact Page
+[X] Pages Implementation
+  [X] Home Page
+    [X] Hero Section
+    [X] About Section
+    [X] Skills Section
+    [X] Projects Section
+    [X] Contact Section
+  [X] Portfolio Page
+  [X] Contact Page
 
-[ ] Features & Optimization
-  [ ] SEO Optimization
+[/] Features & Optimization
+  [X] SEO Optimization (Meta tags, descriptions)
+  [X] Accessibility Implementation
   [ ] Performance Optimization
-  [ ] Accessibility Implementation
   [ ] Testing & Bug Fixes
+  [ ] Final Review
 
-### Tech Stack
-- Next.js (Latest version)
-- React
-- TypeScript
-- TailwindCSS
-- Framer Motion
-- Shadcn UI Components
+### Current Focus
+- Fixing TypeScript errors in animated components
+- Optimizing performance
+- Implementing remaining accessibility features
+- Testing across different devices and browsers
 
-### Project Structure (Planned)
-```
-src/
-├── app/                 # Next.js 13+ app directory
-├── components/          # Reusable components
-│   ├── ui/             # UI components (buttons, cards, etc.)
-│   ├── layout/         # Layout components
-│   └── sections/       # Page sections
-├── lib/                # Utilities and helpers
-├── styles/             # Global styles
-└── types/              # TypeScript types
-```
+### Next Steps
+1. Complete performance optimization
+2. Run comprehensive accessibility audit
+3. Test responsive design across all breakpoints
+4. Fix any remaining bugs or issues
+5. Final review and deployment preparation
 
-### Current Step
-Planning phase - About to initialize the Next.js project with the required configurations.
+### Notes
+- Using Framer Motion for animations
+- Implementing dark/light mode with next-themes
+- Using TailwindCSS for styling
+- Following accessibility best practices
+- Keeping components modular and reusable
+- Spotlight animation duration set to 4s for smoother effect

@@ -33,16 +33,58 @@ export const siteConfig = {
       github: "https://github.com/username/project2",
     },
   ],
-  skills: [
-    { name: "React", level: "Expert" },
-    { name: "Next.js", level: "Expert" },
-    { name: "TypeScript", level: "Expert" },
-    { name: "JavaScript", level: "Expert" },
-    { name: "HTML/CSS", level: "Expert" },
-    { name: "Node.js", level: "Advanced" },
-    { name: "Python", level: "Advanced" },
-    { name: "SQL", level: "Advanced" },
-    { name: "AWS", level: "Intermediate" },
-    { name: "Docker", level: "Intermediate" },
-  ],
+  skillCategories: [
+    {
+      title: "Frontend Development",
+      description: "Building beautiful, responsive user interfaces",
+      icon: "Layout",
+      skills: [
+        { name: "React", icon: "react-original-wordmark" },
+        { name: "Next.js", icon: "nextjs-original-wordmark" },
+        { name: "TypeScript", icon: "typescript-original" },
+        { name: "TailwindCSS", icon: "tailwindcss-original" },
+        { name: "HTML5", icon: "html5-original-wordmark" },
+        { name: "CSS3", icon: "css3-original-wordmark" },
+      ]
+    },
+    {
+      title: "Backend Development",
+      description: "Creating robust server-side applications",
+      icon: "Server",
+      skills: [
+        { name: "Node.js", icon: "nodejs-original" },
+        { name: "Python", icon: "python-original-wordmark" },
+        { name: "C#", icon: "csharp-original" },
+        { name: "Firebase", icon: "firebase-original" },
+        { name: "Firestore", icon: "firebase-original" },
+        { name: "REST APIs", icon: "nodejs-original" },
+      ]
+    },
+    {
+      title: "Tools & DevOps",
+      description: "Streamlining development and productivity",
+      icon: "Code",
+      skills: [
+        { name: "Git", icon: "git-plain-wordmark" },
+        { name: "GitHub", icon: "github-original-wordmark" },
+        { name: "VS Code", icon: "vercel-original-wordmark" },
+        { name: "ChatGPT", icon: "openai" },
+        { name: "Cursor", icon: "github-original-wordmark" },
+        { name: "GitHub Copilot", icon: "github-original-wordmark" },
+      ]
+    },
+    {
+      title: "Development Approach",
+      description: "Methodologies and practices I follow",
+      icon: "Workflow",
+      skills: [
+        { name: "Agile", icon: "git-original-wordmark" },
+        { name: "Clean Code", icon: "javascript-original" },
+        { name: "TDD", icon: "javascript-original" },
+        { name: "CI/CD", icon: "github-original-wordmark" },
+        { name: "Code Review", icon: "github-original-wordmark" },
+        { name: "Documentation", icon: "javascript-original" },
+      ]
+    }
+  ]
 } as const; 
