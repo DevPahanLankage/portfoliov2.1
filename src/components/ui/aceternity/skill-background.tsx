@@ -9,11 +9,6 @@ export const SkillBackground = () => {
       {/* Main gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-900 to-black" />
 
-      {/* Animated grid lines */}
-      <div className="absolute inset-0" style={{ opacity: 0.4 }}>
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f20_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f20_1px,transparent_1px)] bg-[size:14px_24px]" />
-      </div>
-
       {/* Floating orbs */}
       <motion.div
         className="absolute w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px]"

@@ -329,169 +329,200 @@ export default function HomePage() {
       </section>
 
       {/* Skills Section */}
-      <section className="relative py-20 overflow-hidden">
-        <SkillBackground />
-        <Spotlight 
-          gradientFirst="radial-gradient(68.54% 68.72% at 55.02% 31.46%, rgba(255, 255, 255, 0.1) 0, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0) 80%)"
-          gradientSecond="radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.08) 0, rgba(255, 255, 255, 0.04) 80%, transparent 100%)"
-          gradientThird="radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.06) 0, rgba(255, 255, 255, 0.04) 80%, transparent 100%)"
-          translateY={-200}
-          duration={4}
+      <section 
+        className="relative py-20 overflow-hidden group"
+        onMouseMove={(e) => {
+          const rect = e.currentTarget.getBoundingClientRect();
+          const mouseX = e.clientX - rect.left;
+          const mouseY = e.clientY - rect.top;
+          e.currentTarget.style.setProperty('--mouse-x', `${mouseX}px`);
+          e.currentTarget.style.setProperty('--mouse-y', `${mouseY}px`);
+        }}
+      >
+        <div className="absolute inset-0 z-0">
+          <SkillBackground />
+        </div>
+        <div className="absolute inset-0 z-10">
+          <Spotlight 
+            gradientFirst="radial-gradient(68.54% 68.72% at 55.02% 31.46%, rgba(255, 255, 255, 0.1) 0, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0) 80%)"
+            gradientSecond="radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.08) 0, rgba(255, 255, 255, 0.04) 80%, transparent 100%)"
+            gradientThird="radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.06) 0, rgba(255, 255, 255, 0.04) 80%, transparent 100%)"
+            translateY={-200}
+            duration={4}
+          />
+        </div>
+        <div className="absolute inset-0 z-20 bg-dot-thick-neutral-800 pointer-events-none opacity-30" />
+        <motion.div
+          className="pointer-events-none bg-dot-thick-indigo-500 absolute inset-0 z-30 opacity-0 transition duration-300 group-hover:opacity-50"
+          style={{
+            WebkitMaskImage: `radial-gradient(
+              250px circle at var(--mouse-x) var(--mouse-y),
+              black 0%,
+              transparent 100%
+            )`,
+            maskImage: `radial-gradient(
+              250px circle at var(--mouse-x) var(--mouse-y),
+              black 0%,
+              transparent 100%
+            )`,
+          }}
         />
-        <div className="container relative mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <AnimatedText
-              text="Skills & Expertise"
-              el="h2"
-              className="text-5xl md:text-7xl font-bold mb-4 text-white"
-            />
-            <p className="text-xl text-zinc-400 mb-8">
-              Technologies and tools I specialize in
-            </p>
-          </motion.div>
+        <div className="relative z-40">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12"
+            >
+              <AnimatedText
+                text="Skills & Expertise"
+                el="h2"
+                className="text-5xl md:text-7xl font-bold mb-4 text-white"
+              />
+              <p className="text-xl text-zinc-400 mb-8">
+                Technologies and tools I specialize in
+              </p>
+            </motion.div>
 
-          {/* Skills Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {siteConfig.skillCategories.slice(0, 3).map((category, index) => (
-              <motion.div
-                key={category.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
-                className="group relative"
-              >
-                {/* Category Card */}
-                <CardSpotlight className="h-full">
-                  <div className="relative z-10 flex flex-col items-center text-center mb-8">
-                    <div className="p-3 rounded-xl bg-white/10 mb-4 backdrop-blur-sm">
-                      {category.icon === "Layout" && <Layout className="w-6 h-6" />}
-                      {category.icon === "Server" && <Server className="w-6 h-6" />}
-                      {category.icon === "Code" && <Code className="w-6 h-6" />}
+            {/* Skills Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {siteConfig.skillCategories.slice(0, 3).map((category, index) => (
+                <motion.div
+                  key={category.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.2 }}
+                  className="group relative"
+                >
+                  {/* Category Card */}
+                  <CardSpotlight className="h-full">
+                    <div className="relative z-10 flex flex-col items-center text-center mb-8">
+                      <div className="p-3 rounded-xl bg-white/10 mb-4 backdrop-blur-sm">
+                        {category.icon === "Layout" && <Layout className="w-6 h-6" />}
+                        {category.icon === "Server" && <Server className="w-6 h-6" />}
+                        {category.icon === "Code" && <Code className="w-6 h-6" />}
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-2">{category.title}</h3>
+                      <p className="text-sm text-zinc-400">{category.description}</p>
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">{category.title}</h3>
-                    <p className="text-sm text-zinc-400">{category.description}</p>
-                  </div>
 
-                  {/* Skills Grid */}
-                  <div className="grid grid-cols-2 gap-4">
-                    {category.skills.map((skill, skillIndex) => (
-                      <motion.div
-                        key={skill.name}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.2 + skillIndex * 0.1 }}
-                        className="group/skill relative"
-                      >
-                        <div className="relative overflow-hidden rounded-lg bg-white/[0.08] p-4 hover:bg-white/[0.12] transition-colors duration-300">
-                          <div className="relative z-10 flex items-center justify-between">
-                            <p className="text-sm font-medium text-white">{skill.name}</p>
-                            <div className="relative w-6 h-6">
-                              <Image
-                                src={`/logos/${skill.icon}.svg`}
-                                alt={skill.name}
-                                fill
-                                className="object-contain opacity-75 group-hover/skill:opacity-100 transition-opacity"
-                              />
+                    {/* Skills Grid */}
+                    <div className="grid grid-cols-2 gap-4">
+                      {category.skills.map((skill, skillIndex) => (
+                        <motion.div
+                          key={skill.name}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.2 + skillIndex * 0.1 }}
+                          className="group/skill relative"
+                        >
+                          <div className="relative overflow-hidden rounded-lg bg-white/[0.08] p-4 hover:bg-white/[0.12] transition-colors duration-300">
+                            <div className="relative z-10 flex items-center justify-between">
+                              <p className="text-sm font-medium text-white">{skill.name}</p>
+                              <div className="relative w-6 h-6">
+                                <Image
+                                  src={`/logos/${skill.icon}.svg`}
+                                  alt={skill.name}
+                                  fill
+                                  className="object-contain opacity-75 group-hover/skill:opacity-100 transition-opacity"
+                                />
+                              </div>
+                            </div>
+                            {/* Hover Effect */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover/skill:opacity-100 transition-opacity duration-300" />
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </CardSpotlight>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Development Approach Workflow */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-20"
+            >
+              <div className="text-center mb-20">
+                <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">Development Approach</h3>
+                <p className="text-xl text-zinc-400">My systematic approach to software development</p>
+              </div>
+
+              <div className="flex justify-center">
+                <TracingBeam className="w-full max-w-4xl">
+                  <div className="relative flex flex-col items-center">
+                    {/* Workflow Steps */}
+                    <div className="space-y-28">
+                      {[
+                        {
+                          title: "Planning & Design",
+                          description: "Starting with Agile methodologies, breaking down requirements into manageable sprints",
+                          icon: PenTool
+                        },
+                        {
+                          title: "Development",
+                          description: "Writing clean, maintainable code following best practices and design patterns",
+                          icon: CodeSquare
+                        },
+                        {
+                          title: "Testing",
+                          description: "Implementing Test-Driven Development (TDD) to ensure code quality and reliability",
+                          icon: TestTube
+                        },
+                        {
+                          title: "Code Review",
+                          description: "Conducting thorough peer reviews to maintain code quality and share knowledge",
+                          icon: GitPullRequest
+                        },
+                        {
+                          title: "Deployment",
+                          description: "Using CI/CD pipelines for automated testing and seamless deployment",
+                          icon: Rocket
+                        },
+                        {
+                          title: "Documentation",
+                          description: "Creating comprehensive documentation for better maintainability and onboarding",
+                          icon: FileText
+                        }
+                      ].map((step, index) => (
+                        <motion.div
+                          key={step.title}
+                          initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.2 * index }}
+                          className="relative flex items-center justify-center"
+                        >
+                          {/* Content */}
+                          <div 
+                            className={`absolute w-[300px] ${
+                              index % 2 === 0 
+                                ? "right-[calc(50%+40px)] text-right" 
+                                : "left-[calc(50%+40px)] text-left"
+                            }`}
+                          >
+                            <h4 className="text-xl font-semibold text-white mb-2">{step.title}</h4>
+                            <p className="text-zinc-400">{step.description}</p>
+                          </div>
+
+                          {/* Circle and Icon */}
+                          <div className="flex items-center justify-center">
+                            <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center relative group">
+                              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+                              <step.icon className="w-6 h-6 text-white/70 group-hover:text-white transition-colors duration-300" />
                             </div>
                           </div>
-                          {/* Hover Effect */}
-                          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover/skill:opacity-100 transition-opacity duration-300" />
-                        </div>
-                      </motion.div>
-                    ))}
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
-                </CardSpotlight>
-              </motion.div>
-            ))}
+                </TracingBeam>
+              </div>
+            </motion.div>
           </div>
-
-          {/* Development Approach Workflow */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-20"
-          >
-            <div className="text-center mb-20">
-              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">Development Approach</h3>
-              <p className="text-xl text-zinc-400">My systematic approach to software development</p>
-            </div>
-
-            <div className="flex justify-center">
-              <TracingBeam className="w-full max-w-4xl">
-                <div className="relative flex flex-col items-center">
-                  {/* Workflow Steps */}
-                  <div className="space-y-28">
-                    {[
-                      {
-                        title: "Planning & Design",
-                        description: "Starting with Agile methodologies, breaking down requirements into manageable sprints",
-                        icon: PenTool
-                      },
-                      {
-                        title: "Development",
-                        description: "Writing clean, maintainable code following best practices and design patterns",
-                        icon: CodeSquare
-                      },
-                      {
-                        title: "Testing",
-                        description: "Implementing Test-Driven Development (TDD) to ensure code quality and reliability",
-                        icon: TestTube
-                      },
-                      {
-                        title: "Code Review",
-                        description: "Conducting thorough peer reviews to maintain code quality and share knowledge",
-                        icon: GitPullRequest
-                      },
-                      {
-                        title: "Deployment",
-                        description: "Using CI/CD pipelines for automated testing and seamless deployment",
-                        icon: Rocket
-                      },
-                      {
-                        title: "Documentation",
-                        description: "Creating comprehensive documentation for better maintainability and onboarding",
-                        icon: FileText
-                      }
-                    ].map((step, index) => (
-                      <motion.div
-                        key={step.title}
-                        initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.2 * index }}
-                        className="relative flex items-center justify-center"
-                      >
-                        {/* Content */}
-                        <div 
-                          className={`absolute w-[300px] ${
-                            index % 2 === 0 
-                              ? "right-[calc(50%+40px)] text-right" 
-                              : "left-[calc(50%+40px)] text-left"
-                          }`}
-                        >
-                          <h4 className="text-xl font-semibold text-white mb-2">{step.title}</h4>
-                          <p className="text-zinc-400">{step.description}</p>
-                        </div>
-
-                        {/* Circle and Icon */}
-                        <div className="flex items-center justify-center">
-                          <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center relative group">
-                            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
-                            <step.icon className="w-6 h-6 text-white/70 group-hover:text-white transition-colors duration-300" />
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              </TracingBeam>
-            </div>
-          </motion.div>
         </div>
       </section>
 
